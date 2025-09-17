@@ -169,7 +169,7 @@ cp -r server server-backup-$(date +%F-%H%M%S)
 
 ---
 
-## 1️⃣1️⃣ Buenas prácticas
+## 📌 Buenas prácticas
 
 1. Mantén siempre una copia de seguridad de `server`.
 2. Evita exponer el puerto RCON a internet.
