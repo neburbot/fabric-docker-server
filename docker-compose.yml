@@ -1,0 +1,31 @@
+############################################################
+# Lowmem:
+#   JAVA_XMS: 4G
+#   JAVA_XMX: 4G
+#   JVM_FLAGS: -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:+OptimizeStringConcat -XX:+UseCompressedOops
+#
+# Highmem:
+#   JAVA_XMS: 8G
+#   JAVA_XMX: 8G
+#   JVM_FLAGS: -XX:+UseZGC -XX:+ZGenerational -XX:+AlwaysPreTouch -XX:+ParallelRefProcEnabled -XX:+OptimizeStringConcat -XX:+UseCompressedOops
+############################################################
+version: "3.9"
+
+services:
+  server-service:
+    build: .
+    image: server-service
+    container_name: server-container
+    ports:
+      - "25565:25565"
+    volumes:
+      - ./server:/minecraft/server
+    environment:
+      MC_VERSION: "1.21.8"  
+      FABRIC_VERSION: "0.16.14"  
+      FABRIC_INSTALLER_URL: "https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.1.0/fabric-installer-1.1.0.jar"
+      JAVA_XMS: "8G"
+      JAVA_XMX: "8G"
+      JVM_FLAGS: "-XX:+UseZGC -XX:+ZGenerational -XX:+AlwaysPreTouch -XX:+ParallelRefProcEnabled -XX:+OptimizeStringConcat -XX:+UseCompressedOops"
+      RCON_PASSWORD: "15121173"
+    restart: unless-stopped
